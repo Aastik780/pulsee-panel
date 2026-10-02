@@ -1,0 +1,32 @@
+{
+  "name": "pulsee-panel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live monitoring panel for the Pulsee Discord music bot — status, now playing, queue and system stats.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aastik780/pulsee-panel.git"
+  },
+  "license": "MIT",
+  "author": "Aastik Gupta",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
