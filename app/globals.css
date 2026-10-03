@@ -9,7 +9,24 @@
   --accent-2: #4dd0e1;
   --ok: #3ddc84;
   --down: #ff5d73;
+  --skel: #1a2032;
+  --track: #1c2235;
   --radius: 14px;
+}
+
+html[data-theme='light'] {
+  --bg: #f4f6fb;
+  --bg-soft: #eef1f8;
+  --card: #ffffff;
+  --card-border: #dfe4f0;
+  --text: #1a2033;
+  --text-dim: #5c6a88;
+  --accent: #6244e0;
+  --accent-2: #0b95a6;
+  --ok: #16a34a;
+  --down: #e11d48;
+  --skel: #e8ecf6;
+  --track: #e3e8f4;
 }
 
 * {
@@ -27,6 +44,14 @@ body {
   color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
+}
+
+html[data-theme='light'],
+html[data-theme='light'] body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(77, 208, 225, 0.06), transparent 55%),
+    var(--bg);
 }
 
 .panel {
@@ -99,7 +124,7 @@ body {
 
 .badge-demo {
   background: rgba(124, 92, 255, 0.14);
-  color: #b3a1ff;
+  color: var(--accent);
   border-color: rgba(124, 92, 255, 0.45);
 }
 
@@ -118,11 +143,33 @@ body {
 .banner {
   background: rgba(255, 93, 115, 0.1);
   border: 1px solid rgba(255, 93, 115, 0.4);
-  color: #ffb3bd;
+  color: var(--down);
   padding: 10px 14px;
   border-radius: 10px;
   margin-bottom: 18px;
   font-size: 0.88rem;
+}
+
+/* ── theme toggle ───────────────────────── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  color: var(--text-dim);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
 }
 
 /* ── grids & cards ──────────────────────── */
@@ -157,7 +204,7 @@ body {
 
 .skeleton {
   min-height: 110px;
-  background: linear-gradient(100deg, var(--card) 40%, #1a2032 50%, var(--card) 60%);
+  background: linear-gradient(100deg, var(--card) 40%, var(--skel) 50%, var(--card) 60%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite linear;
 }
@@ -314,7 +361,7 @@ body {
   margin-top: 16px;
   height: 7px;
   border-radius: 999px;
-  background: #1c2235;
+  background: var(--track);
   overflow: hidden;
 }
 
@@ -402,7 +449,7 @@ body {
 .avatar-fallback {
   display: inline-grid;
   place-items: center;
-  background: #232a3d;
+  background: var(--card-border);
   color: var(--accent-2);
   font-size: 0.62rem;
   font-weight: 700;

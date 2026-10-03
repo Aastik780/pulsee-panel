@@ -6,6 +6,16 @@ import type { StatusPayload } from '@/lib/types';
 
 const REFRESH_MS = 5000;
 
+type ThemeMode = 'dark' | 'light' | 'auto';
+const THEME_KEY = 'pulsee-theme';
+const THEME_CYCLE: ThemeMode[] = ['dark', 'light', 'auto'];
+
+function applyTheme(mode: ThemeMode): void {
+  const resolved =
+    mode === 'auto' ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : mode;
+  document.documentElement.dataset.theme = resolved;
+}
+
 function fmtDuration(totalSeconds: number): string {
   if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return '0:00';
   const h = Math.floor(totalSeconds / 3600);
@@ -44,7 +54,31 @@ export default function Dashboard() {
   const [data, setData] = useState<StatusPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [lastSync, setLastSync] = useState<Date | null>(null);
+  const [theme, setTheme] = useState<ThemeMode>('dark');
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const saved = (localStorage.getItem(THEME_KEY) as ThemeMode | null) ?? 'auto';
+    const mode: ThemeMode = THEME_CYCLE.includes(saved) ? saved : 'auto';
+    setTheme(mode);
+    applyTheme(mode);
+
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    const onSystemChange = () => {
+      if ((localStorage.getItem(THEME_KEY) as ThemeMode | null) === 'auto' || !localStorage.getItem(THEME_KEY)) {
+        applyTheme('auto');
+      }
+    };
+    mq.addEventListener('change', onSystemChange);
+    return () => mq.removeEventListener('change', onSystemChange);
+  }, []);
+
+  function cycleTheme() {
+    const next = THEME_CYCLE[(THEME_CYCLE.indexOf(theme) + 1) % THEME_CYCLE.length];
+    setTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  }
 
   useEffect(() => {
     let alive = true;
@@ -89,6 +123,9 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="header-right">
+          <button type="button" className="theme-toggle" onClick={cycleTheme} title="Cycle theme (dark / light / auto)">
+            {theme === 'dark' ? 'DARK' : theme === 'light' ? 'LIGHT' : 'AUTO'}
+          </button>
           <span className={`badge badge-${source}`}>{sourceLabel}</span>
           <span className="sync">
             {lastSync
