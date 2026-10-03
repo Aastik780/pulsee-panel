@@ -38,7 +38,7 @@ Open http://localhost:3000 — you'll see **DEMO DATA** with sample stats.
 
 ```bash
 cp .env.example .env.local
-# set: PULSEE_BOT_API_URL=http://localhost:5000
+# set: PULSEE_BOT_API_URL=http://localhost:5100
 npm run dev
 ```
 

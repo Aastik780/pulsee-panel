@@ -236,6 +236,23 @@ body {
   letter-spacing: -0.01em;
 }
 
+.card-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.guild-line {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.guild-line b {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
 .chip {
   font-size: 0.72rem;
   color: var(--accent-2);

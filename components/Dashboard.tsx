@@ -139,7 +139,15 @@ export default function Dashboard() {
           <section className="grid main-grid">
             <div className="card now-playing">
               <div className="card-head">
-                <h2>Now Playing</h2>
+                <div className="card-head-text">
+                  <h2>Now Playing</h2>
+                  {data.guild && (
+                    <span className="guild-line">
+                      on <b>{data.guild.name}</b>
+                      {data.guild.voiceChannel ? ` · #${data.guild.voiceChannel}` : ''}
+                    </span>
+                  )}
+                </div>
                 {np && <span className="chip">{fmtDuration(np.duration)}</span>}
               </div>
 
@@ -172,7 +180,14 @@ export default function Dashboard() {
 
             <div className="card queue">
               <div className="card-head">
-                <h2>Queue</h2>
+                <div className="card-head-text">
+                  <h2>Queue</h2>
+                  {data.guild && (
+                    <span className="guild-line">
+                      for <b>{data.guild.name}</b>
+                    </span>
+                  )}
+                </div>
                 <span className="chip">{data.queue.length} upcoming</span>
               </div>
 

@@ -21,6 +21,10 @@ export function demoStatus(source: 'demo' | 'offline' = 'demo'): StatusPayload {
             requestedBy: { username: 'aastik' },
           }
         : null,
+    guild:
+      source === 'demo'
+        ? { id: 'demo-1', name: 'Aastik Playground', voiceChannel: 'lofi room' }
+        : null,
     queue:
       source === 'demo'
         ? [

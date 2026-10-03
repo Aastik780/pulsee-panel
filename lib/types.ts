@@ -38,12 +38,19 @@ export interface SystemInfo {
   platform: string;
 }
 
+export interface GuildInfo {
+  id: string;
+  name: string;
+  voiceChannel: string | null;
+}
+
 export type StatusSource = 'live' | 'demo' | 'offline';
 
 export interface StatusPayload {
   source: StatusSource;
   bot: BotStats;
   nowPlaying: TrackInfo | null;
+  guild: GuildInfo | null;
   queue: QueueItem[];
   system: SystemInfo;
   updatedAt: string;
